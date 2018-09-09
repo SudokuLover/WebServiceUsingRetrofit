@@ -16,9 +16,9 @@ import retrofit2.http.Query;
 
 public interface Api {
 
-    String BASE_URL = "https://fellafeeds-assignment.herokuapp.com";
+    String BASE_URL = "https://fellafeeds-assignment.herokuapp.com/";
 
-    @POST("marvel")
+    @GET("")
     Call<Hero> getHeroes();
 }
 

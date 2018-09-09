@@ -70,21 +70,21 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Hero> call, Response<Hero> response) {
                 Hero hero = response.body();
 
-                Log.d(TAG,"inside onResponse" + response.body());
-
+                Log.d(TAG,"inside onResponse" + response.isSuccessful());
+/*
                 if(hero.getTrigger_event().equals("true"))
                 {
                     Toast.makeText(MainActivity.this, hero.getTrigger_event()+" "+hero.getNumber(), Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Toast.makeText(MainActivity.this, hero.getTrigger_event()+" "+hero.getNumber(), Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
 
             @Override
             public void onFailure(Call<Hero> call, Throwable t) {
 
-                Log.d(TAG,"onFailure");
+                Log.d(TAG,"onFailure"+t.getMessage());
                 Toast.makeText(MainActivity.this, "Data processing is failed, please check your internet connection", Toast.LENGTH_SHORT).show();
             }
         });
