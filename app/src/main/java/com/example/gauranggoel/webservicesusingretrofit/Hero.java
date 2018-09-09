@@ -8,31 +8,29 @@ import com.google.gson.annotations.SerializedName;
 
 public class Hero {
     @SerializedName("trigger_event")
-    private String event;
+    private String trigger_event;
 
     @SerializedName("number")
-    private String num;
+    private int number;
 
-
-    public Hero(String event, String num) {
-        this.event = event;
-        this.num = num;
+    public Hero(String trigger_event, int number) {
+        this.trigger_event = trigger_event;
+        this.number = number;
     }
 
-    public String getEvent() {
-        return event;
+    public String getTrigger_event() {
+        return trigger_event;
     }
 
-    public void setEvent(String event) {
-        this.event = event;
+    public void setTrigger_event(String trigger_event) {
+        this.trigger_event = trigger_event;
     }
 
-    public String getNum() {
-        return num;
+    public int getNumber() {
+        return number;
     }
 
-    public void setNum(String num) {
-        this.num = num;
+    public void setNumber(int number) {
+        this.number = number;
     }
-
 }

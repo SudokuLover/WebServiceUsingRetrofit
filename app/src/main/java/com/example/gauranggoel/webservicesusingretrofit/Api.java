@@ -19,7 +19,7 @@ public interface Api {
     String BASE_URL = "https://fellafeeds-assignment.herokuapp.com";
 
     @POST("marvel")
-    Call<List<Hero>> getHeroes();
+    Call<Hero> getHeroes();
 }
 
 

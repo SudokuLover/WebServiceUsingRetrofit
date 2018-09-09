@@ -62,27 +62,27 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG,"onCreate");
         Api api = retrofit.create(Api.class);
 
-        Call<List<Hero>> call = api.getHeroes();
+        Call<Hero> call = api.getHeroes();
 
         Log.d(TAG,"got call refrence");
-        call.enqueue(new Callback<List<Hero>>() {
+        call.enqueue(new Callback<Hero>() {
             @Override
-            public void onResponse(Call<List<Hero>> call, Response<List<Hero>> response) {
-                List<Hero> hero = response.body();
+            public void onResponse(Call<Hero> call, Response<Hero> response) {
+                Hero hero = response.body();
 
                 Log.d(TAG,"inside onResponse" + response.body());
 
-                if(hero.get(0).getEvent().equals("true"))
+                if(hero.getTrigger_event().equals("true"))
                 {
-                    Toast.makeText(MainActivity.this, hero.get(0).getEvent()+" "+hero.get(0).getNum(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, hero.getTrigger_event()+" "+hero.getNumber(), Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(MainActivity.this, hero.get(0).getEvent()+" "+hero.get(0).getNum(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, hero.getTrigger_event()+" "+hero.getNumber(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Hero>> call, Throwable t) {
+            public void onFailure(Call<Hero> call, Throwable t) {
 
                 Log.d(TAG,"onFailure");
                 Toast.makeText(MainActivity.this, "Data processing is failed, please check your internet connection", Toast.LENGTH_SHORT).show();
