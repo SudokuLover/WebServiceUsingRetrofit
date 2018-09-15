@@ -16,6 +16,11 @@ public interface Api {
 
     @GET("/services/rest/?method=flickr.photos.getRecent&api_key=6f102c62f41998d151e5a1b48713cf13&format=json&nojsoncallback=1&extras=url_s")
     Call<Hero> getHeroes();
+
+    @GET("/services/rest/?method=flickr.photos.search&api_key=6f102c62f41998d151e5a1b48713cf13&format=json&nojsoncallback=1&extras=url_s")
+    Call<Hero> call_articles(
+            @Query("text")String source
+    );
 }
 
 
