@@ -1,7 +1,10 @@
 package com.example.gauranggoel.webservicesusingretrofit;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,42 +21,26 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    RecyclerView recyclerView;
+    CustomAdaptor adapter;
+    ProgressDialog pd;
     public static final String TAG="Main";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        pd= new ProgressDialog(this);
+        pd.setCanceledOnTouchOutside(true);
+        pd.setTitle("Downloading");
+        pd.setMessage("Processing...");
+
+        pd.show();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
-
-   /*     Log.d(TAG,"onCreate");
-        Api api = retrofit.create(Api.class);
-        Log.d(TAG,"got call refrence");
-        Callback<Hero> call = new Callback<Hero>() {
-            @Override
-            public void onResponse(Call<Hero> call, Response<Hero> response) {
-                Hero hero = response.body();
-
-                Log.d(TAG,"inside onResponse" + response.body());
-
-                Toast.makeText(MainActivity.this, ""+hero.getPage(), Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onFailure(Call<Hero> call, Throwable t) {
-                Log.d(TAG,"onFailure");
-                Toast.makeText(MainActivity.this, "Data processing is failed, please check your internet connection", Toast.LENGTH_SHORT).show();
-
-            }
-        };
-*/
-
-
-   //     Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).build();
-
-        //.baseUrl(Api.BASE_URL)
         Log.d(TAG,"onCreate");
         Api api = retrofit.create(Api.class);
 
@@ -72,8 +59,14 @@ public class MainActivity extends AppCompatActivity {
 
                 ArrayList<Image> img1=hero1.getImg();
 
+
                //Toast.makeText(MainActivity.this, ""+img1.get(0).getIsfriend()+" ", Toast.LENGTH_SHORT).show();
 
+                adapter = new CustomAdaptor(getApplicationContext(), img1);
+                recyclerView.setAdapter(adapter);
+
+                if(pd!=null)
+                    pd.dismiss();
             }
 
             @Override
@@ -81,17 +74,14 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.d(TAG,"onFailure"+t.getMessage());
                 Toast.makeText(MainActivity.this, "Data processing is failed, please check your internet connection", Toast.LENGTH_SHORT).show();
+
+                if(pd!=null)
+                    pd.dismiss();
             }
         });
 
 
 
-/*
- Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Api.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
-                .build();
-*/
 
  }
 }
