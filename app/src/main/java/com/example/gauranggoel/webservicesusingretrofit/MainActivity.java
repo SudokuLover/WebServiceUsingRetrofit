@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Request;
@@ -24,12 +25,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-       /* Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
-        Log.d(TAG,"onCreate");
+   /*     Log.d(TAG,"onCreate");
         Api api = retrofit.create(Api.class);
         Log.d(TAG,"got call refrence");
-
         Callback<Hero> call = new Callback<Hero>() {
             @Override
             public void onResponse(Call<Hero> call, Response<Hero> response) {
@@ -37,13 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.d(TAG,"inside onResponse" + response.body());
 
-                if(hero.getEvent().equals("true"))
-                {
-                    Toast.makeText(MainActivity.this, hero.getEvent()+" "+hero.getNum(), Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(MainActivity.this, hero.getEvent()+" "+hero.getNum(), Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(MainActivity.this, ""+hero.getPage(), Toast.LENGTH_SHORT).show();
 
             }
 
@@ -57,8 +51,9 @@ public class MainActivity extends AppCompatActivity {
 */
 
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+   //     Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).build();
 
+        //.baseUrl(Api.BASE_URL)
         Log.d(TAG,"onCreate");
         Api api = retrofit.create(Api.class);
 
@@ -70,15 +65,15 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Hero> call, Response<Hero> response) {
                 Hero hero = response.body();
 
-                Log.d(TAG,"inside onResponse" + response.isSuccessful());
-/*
-                if(hero.getTrigger_event().equals("true"))
-                {
-                    Toast.makeText(MainActivity.this, hero.getTrigger_event()+" "+hero.getNumber(), Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(MainActivity.this, hero.getTrigger_event()+" "+hero.getNumber(), Toast.LENGTH_SHORT).show();
-                }*/
+                Log.d(TAG,"inside onResponse " + response.isSuccessful()+"  "+hero + " " + hero.getHero());
+
+                Hero1 hero1=hero.getHero();
+
+
+                ArrayList<Image> img1=hero1.getImg();
+
+               //Toast.makeText(MainActivity.this, ""+img1.get(0).getIsfriend()+" ", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override

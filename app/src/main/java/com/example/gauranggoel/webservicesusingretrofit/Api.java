@@ -3,22 +3,18 @@ package com.example.gauranggoel.webservicesusingretrofit;
 /**
  * Created by gaurang goel on 09-09-2018.
  */
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-
-/**
- * Created by Belal on 10/2/2017.
- */
+import retrofit2.http.Url;
 
 public interface Api {
 
-    String BASE_URL = "https://fellafeeds-assignment.herokuapp.com/";
+    String BASE_URL = "https://api.flickr.com";
 
-    @GET("")
+    @GET("/services/rest/?method=flickr.photos.getRecent&api_key=6f102c62f41998d151e5a1b48713cf13&format=json&nojsoncallback=1&extras=url_s")
     Call<Hero> getHeroes();
 }
 
